@@ -10,22 +10,13 @@ variable "name" {
   default = ""
 }
 
-variable "all_users" {
-  type = "list"
-}
-
-variable "user_map_groups" {
-  type = "map"
-}
-
 variable "aws_account" {
   default = ""
 }
 
+variable "wordpress_instance_type" {}
+
 #network
-
-variable "name" {}
-
 variable "vpc_cidr" {}
 
 variable "azs" {}
@@ -39,10 +30,6 @@ variable "public_subnets" {}
 variable "database_subnets" {}
 
 variable "key_name" {}
-
-variable "sub_domain" {}
-
-variable "route_zone_id" {}
 
 variable "openvpn_instance_type" {}
 

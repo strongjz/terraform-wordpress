@@ -22,10 +22,6 @@ variable "openvpn_admin_pw" {}
 
 variable "vpn_cidr" {}
 
-variable "sub_domain" {}
-
-variable "route_zone_id" {}
-
 variable "admin_ip" {}
 
 variable "user_count" {

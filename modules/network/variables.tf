@@ -14,10 +14,6 @@ variable "database_subnets" {}
 
 variable "key_name" {}
 
-variable "sub_domain" {}
-
-variable "route_zone_id" {}
-
 variable "openvpn_instance_type" {}
 
 variable "openvpn_user" {}

@@ -67,8 +67,6 @@ module "openvpn" {
   openvpn_admin_user = "${var.openvpn_admin_user}"
   openvpn_admin_pw   = "${var.openvpn_admin_pw}"
   vpn_cidr           = "${var.openvpn_cidr}"
-  sub_domain         = "${var.sub_domain}"
-  route_zone_id      = "${var.route_zone_id}"
   admin_ip           = "${var.admin_ip}"
 }
 

@@ -1,3 +1,7 @@
+#--------------------------------------------------------------
+# This module creates Cloud trail resources
+#--------------------------------------------------------------
+
 variable "cloudtrail_bucket_id" {}
 variable "name" {}
 

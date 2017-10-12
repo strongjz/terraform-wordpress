@@ -1,3 +1,7 @@
+#--------------------------------------------------------------
+# This module creates the S3 resource for Cloud trail
+#--------------------------------------------------------------
+
 variable "name" {}
 
 variable "aws_region" {}
@@ -6,6 +10,17 @@ resource "aws_s3_bucket" "cloudtrail" {
   bucket        = "${var.name}-cloudtrail-${var.aws_region}"
   force_destroy = true
   policy        = "${data.aws_iam_policy_document.cloudtrail.json}"
+}
+
+resource "aws_s3_bucket" "wordpressdemo" {
+  bucket        = "terraform-wordpress-demo"
+  force_destroy = true
+}
+
+resource "aws_s3_bucket_object" "wordpress" {
+  bucket = "${aws_s3_bucket.wordpressdemo.bucket}"
+  key    = "wordpress-nginx/"
+  source = "${file("./files/wordpress-nginx.zip")}"
 }
 
 data "aws_iam_policy_document" "cloudtrail" {
