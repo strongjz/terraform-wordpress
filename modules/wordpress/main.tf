@@ -27,7 +27,6 @@ resource "aws_instance" "wordpress" {
   subnet_id              = "${element(split(",", var.private_subnets),0)}"
   user_data              = "${file("./files/wordpress-userdata.sh")}"
   iam_instance_profile   = "${aws_iam_role.wordpress.name}"
-  private_ip             = "${cidrhost(element(split(",", var.private_subnets),count.index), count.index + 10)}"
 }
 
 #security group

@@ -49,10 +49,7 @@ resource "aws_security_group" "wordpress_elb" {
     protocol  = "tcp"
     from_port = 80
     to_port   = 80
-
-    security_groups = [
-      "sg-e4905b94",
-    ]
+    cidr_blocks = ["0.0.0.0/0"]
   }
 
   egress {
