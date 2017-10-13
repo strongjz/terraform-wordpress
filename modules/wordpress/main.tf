@@ -20,9 +20,9 @@ data "aws_ami" "amazon_linux" {
 
 #instance
 resource "aws_instance" "wordpress" {
-  count = 3
+  count = 1
   ami   = "${data.aws_ami.amazon_linux.id}"
-
+  key_name = "${var.key_name}"
   instance_type          = "${var.wordpress_instance_type}"
   vpc_security_group_ids = ["${aws_security_group.wordpress.id}"]
   subnet_id              = "${element(split(",", var.public_subnet_ids),count.index)}"
@@ -32,17 +32,6 @@ resource "aws_instance" "wordpress" {
   tags {
     Name = "${var.name}-${count.index}"
   }
-
-  provisioner "file" {
-  source      = "${file("./files/ansible/")}"
-  destination = "~/ansible"
-
-  connection {
-    type     = "ssh"
-    user     = "ec2-user"
-    private_key = "${file(".files/wordpress-demo-key.pem")}"
-  }
-}
 
 }
 
