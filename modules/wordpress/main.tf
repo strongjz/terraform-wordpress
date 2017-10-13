@@ -18,6 +18,20 @@ data "aws_ami" "amazon_linux" {
   owners = ["137112412989"] # Amazon
 }
 
+resource "aws_eip" "wordpress" {
+  vpc = true
+
+  lifecycle {
+    create_before_destroy = true
+  }
+}
+
+resource "aws_eip_association" "eip_wordpress" {
+  instance_id   = "${aws_instance.wordpress.id}"
+  allocation_id = "${aws_eip.wordpress.id}"
+}
+
+
 #instance
 resource "aws_instance" "wordpress" {
   count                  = 1
