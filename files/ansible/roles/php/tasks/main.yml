@@ -7,5 +7,4 @@
     - libicu
     - libicu-devel
     - php-devel
-    - gcc
-    - gcc-c++
+  

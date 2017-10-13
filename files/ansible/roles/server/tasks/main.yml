@@ -2,7 +2,7 @@
 
 - name: Install required software
   yum: name={{ item }} state=present
-  become: yes
+  become: true
   with_items:
     - httpd
     - mysql-server
