@@ -1,7 +1,7 @@
 # Create a new load balancer
 resource "aws_elb" "bar" {
   name    = "${var.name}-elb"
-  subnets = ["${var.public_subnet_ids}"]
+  subnets = ["${split(",", var.public_subnet_ids)}"]
 
   security_groups = [
     "${aws_security_group.wordpress_elb.id}",
