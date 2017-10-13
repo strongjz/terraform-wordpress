@@ -28,12 +28,3 @@ output "database_subnet_ids" {
 output "nat_gateway_ids" {
   value = "${module.nat.nat_gateway_ids}"
 }
-
-# OpenVPN
-output "openvpn_private_ip" {
-  value = "${module.openvpn.private_ip}"
-}
-
-output "openvpn_public_ip" {
-  value = "${module.openvpn.public_ip}"
-}

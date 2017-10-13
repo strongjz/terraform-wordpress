@@ -7,10 +7,6 @@ Before running this Accept the Terms and Services for OpenVPN Access Server in A
 
 Tested with
 
-OpenVPN
-
-https://aws.amazon.com/marketplace/fulfillment?productId=fe8020db-5343-4c43-9e65-5ed4a825c931&ref_=dtl_psb_continue&region=us-east-1
-
 Terraform v0.9.11
 
 GNU Make 3.81
@@ -25,7 +21,7 @@ openvpn_admin_pw - open vpn admin password
 
 admin_ip - IP to allow admin access to certain features
 
-Need to Create your own AWS EC2 key file in ./files/wordpress-demo-key.pem
+Need to Create your own AWS EC2 key file, named wordpress-demo-key.pem and placed in ./files/wordpress-demo-key.pem
 
 #Runs the Terraform plan command
 

@@ -52,6 +52,7 @@ module "database_subnet" {
   vpc_s3_endpoint = "${module.vpc.vpc_s3_endpoint}"
 }
 
+/*
 module "openvpn" {
   source = "./openvpn"
 
@@ -69,6 +70,7 @@ module "openvpn" {
   vpn_cidr           = "${var.openvpn_cidr}"
   admin_ip           = "${var.admin_ip}"
 }
+*/
 
 resource "aws_network_acl" "acl" {
   vpc_id = "${module.vpc.vpc_id}"

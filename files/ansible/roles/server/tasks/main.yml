@@ -6,12 +6,15 @@
   with_items:
     - httpd
     - mysql-server
-    - php 
-    - php-mysql 
-    - php-devel 
-    - php-gd 
-    - php-pecl-memcache 
-    - php-pspell 
-    - php-snmp 
-    - php-xmlrpc 
+    - php
+    - php-mysql
+    - php-devel
+    - php-gd
+    - php-pecl-memcache
+    - php-pspell
+    - php-snmp
+    - php-xmlrpc
     - MySQL-python
+
+- pip:
+    name: MySQL-python

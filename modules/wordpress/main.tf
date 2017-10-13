@@ -20,9 +20,9 @@ data "aws_ami" "amazon_linux" {
 
 #instance
 resource "aws_instance" "wordpress" {
-  count = 1
-  ami   = "${data.aws_ami.amazon_linux.id}"
-  key_name = "${var.key_name}"
+  count                  = 1
+  ami                    = "${data.aws_ami.amazon_linux.id}"
+  key_name               = "${var.key_name}"
   instance_type          = "${var.wordpress_instance_type}"
   vpc_security_group_ids = ["${aws_security_group.wordpress.id}"]
   subnet_id              = "${element(split(",", var.public_subnet_ids),count.index)}"
@@ -38,26 +38,36 @@ resource "aws_instance" "wordpress" {
     destination = "~/ansible.zip"
 
     connection {
-      type     = "ssh"
-      user     = "ec2-user"
+      type        = "ssh"
+      user        = "ec2-user"
       private_key = "${file("./files/wordpress-demo-key.pem")}"
-      host = "${aws_instance.wordpress.public_ip}"
+      host        = "${aws_instance.wordpress.public_ip}"
+    }
+  }
+
+  provisioner "file" {
+    source      = "./files/ansible-provision.sh"
+    destination = "~/ansible/ansible-provision.sh"
+
+    connection {
+      type        = "ssh"
+      user        = "ec2-user"
+      private_key = "${file("./files/wordpress-demo-key.pem")}"
+      host        = "${aws_instance.wordpress.public_ip}"
     }
   }
 
   provisioner "remote-exec" {
     inline = [
-      "unzip  ~/ansible.zip",
-      "cd ~/ansible",
-      "ansible-playbook -i hosts site.yml 1>output.log  2>&1"
+      "bash ansible-provision.sh",
     ]
+
     connection {
-      type     = "ssh"
-      user     = "ec2-user"
+      type        = "ssh"
+      user        = "ec2-user"
       private_key = "${file("./files/wordpress-demo-key.pem")}"
     }
   }
-
 }
 
 #security group
