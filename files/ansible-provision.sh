@@ -1,15 +1,9 @@
 #!/bin/bash -e
 
+sleep 180 #wiating on userdata to complete
+
 unzip  /home/ec2-user/ansible.zip
 
 cd /home/ec2-user/ansible
-
-while  ! [ -x "$(command -v ansible-playbook)" ]
-do
-  echo 'Error: Playbook not installed yet is not installed.' >&2
-  sleep 10
-  source ~/.bash_profile
-  source ~/.bashrc
-done
 
 ansible-playbook -i hosts site.yml
