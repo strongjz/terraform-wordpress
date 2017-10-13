@@ -1,16 +1,17 @@
 ---
-- name: Update yum cache
-  yum: update_cache=yes
-  sudo: yes
 
 - name: Install required software
   yum: name={{ item }} state=present
   sudo: yes
   with_items:
-    - apache2
+    - httpd
     - mysql-server
-    - php5-mysql
-    - php5
-    - libapache2-mod-php5
-    - php5-mcrypt
-    - python-mysqldb
+    - php 
+    - php-mysql 
+    - php-devel 
+    - php-gd 
+    - php-pecl-memcache 
+    - php-pspell 
+    - php-snmp 
+    - php-xmlrpc 
+    - MySQL-python
