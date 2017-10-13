@@ -4,12 +4,15 @@
 
 #instance
 resource "aws_instance" "wordpressdatabase" {
-  ami = "${data.aws_ami.centos_linux.id}"
+  ami = "${data.aws_ami.amazon_linux.id}"
 
   instance_type          = "${var.wordpressdatabase_instance_type}"
   vpc_security_group_ids = ["${aws_security_group.wordpressdatabase.id}"]
   subnet_id              = "${element(split(",", var.database_subnet_ids),0)}"
   private_ip             = "${cidrhost(element(split(",", var.database_subnets),0), count.index + 10)}"
+  tags {
+    Name = "${var.name}-database"
+  }
 }
 
 #security group

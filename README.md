@@ -11,8 +11,8 @@ OpenVPN
 
 https://aws.amazon.com/marketplace/fulfillment?productId=fe8020db-5343-4c43-9e65-5ed4a825c931&ref_=dtl_psb_continue&region=us-east-1
 
-Cento 6 with updates
-https://aws.amazon.com/marketplace/fulfillment?productId=adc4348e-1dc3-41df-b833-e86ba57a33d6&ref_=dtl_psb_continue&region=us-east-1
+Cento 6 with updates HVM
+https://aws.amazon.com/marketplace/pp/B00NQAYLWO?qid=1507906245000&sr=0-1&ref_=srh_res_product_title
 
 Terraform v0.9.11
 

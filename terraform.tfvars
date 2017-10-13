@@ -27,6 +27,6 @@ users = "2"
 # Wordpress
 #--------------------------------------------------------------
 
-wordpress_instance_type = "m4.medium"
+wordpress_instance_type = "t2.medium"
 
-wordpressdatabase_instance_type = "m4.medium"
+wordpressdatabase_instance_type = "t2.medium"
