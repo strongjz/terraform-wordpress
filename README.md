@@ -2,7 +2,7 @@ Terraform scripts for building out a Base VPC, OpenVPN, Subnets, Routes, Routing
 
 #Prereq
 
-Before running this Accept the Terms and Services for OpenVPN Access Server in AWS Market Place, Youll need to login into your AWS account to do so
+Need to Create your own AWS EC2 key file, named wordpress-demo-key.pem and placed in ./files/wordpress-demo-key.pem
 
 
 Tested with
@@ -13,6 +13,7 @@ GNU Make 3.81
 
 ansible 2.3.2.0
 
+
 Need to create a secrets.tfvars file with these vars
 
 aws_profile - name of the AWS profile you using. Terraform code assumes you are running under an AWS profile
@@ -21,16 +22,22 @@ openvpn_admin_pw - open vpn admin password
 
 admin_ip - IP to allow admin access to certain features
 
-Need to Create your own AWS EC2 key file, named wordpress-demo-key.pem and placed in ./files/wordpress-demo-key.pem
+Once the the key is created and the vars are updated, run make all
 
-#Runs the Terraform plan command
+Makefile
+all: check clean get plan apply
 
-make plan
+check: Checks if terraform is installed
 
-#Runs the Terraform apply
+clean: Deletes the .terraform dir
 
-make apply
+get: Gets all the terraform modules
 
+plan: Terraform plan
+
+apply: Terraform apply
+
+destroy: Deletes everything in Terraform
 
 #Ansible role base on Ansible Example
 
@@ -42,14 +49,12 @@ This terraform creates
 
 3 Public Subnet
 3 Private Subnets
-3 VPN subnets
 3 Database Subnets
 
 All Subnets, NACL's and Route tables for all the subnets
 
 1 VPC
-3 Wordpress instances
-1 Wordpress Mysql database
+1 Wordpress instances
 
 S3 bucket for cloudtrail
 

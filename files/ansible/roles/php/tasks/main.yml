@@ -1,7 +1,7 @@
 ---
 - name: Install php extensions
   yum: name={{ item }} state=present
-  sudo: yes
+  become: yes
   with_items:
     - icu
     - libicu

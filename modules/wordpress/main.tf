@@ -47,7 +47,7 @@ resource "aws_instance" "wordpress" {
 
   provisioner "file" {
     source      = "./files/ansible-provision.sh"
-    destination = "~/ansible/ansible-provision.sh"
+    destination = "~/ansible-provision.sh"
 
     connection {
       type        = "ssh"
@@ -59,7 +59,8 @@ resource "aws_instance" "wordpress" {
 
   provisioner "remote-exec" {
     inline = [
-      "bash ansible-provision.sh",
+      "chmod u+x ~/ansible-provision.sh",
+      "sudo ~/ansible-provision.sh",
     ]
 
     connection {

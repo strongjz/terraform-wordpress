@@ -2,7 +2,7 @@
 
 - name: Install required software
   yum: name={{ item }} state=present
-  sudo: yes
+  become: yes
   with_items:
     - httpd
     - mysql-server
@@ -15,6 +15,11 @@
     - php-snmp
     - php-xmlrpc
     - MySQL-python
-
-- pip:
-    name: MySQL-python
+    - python-devel
+    - mysql-devel
+    - gcc
+    - gcc-c++
+    - rpm-build
+- name: pip install mysql python
+  become: true
+  command: pip install MySQL-python

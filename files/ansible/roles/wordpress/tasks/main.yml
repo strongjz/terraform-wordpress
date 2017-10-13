@@ -16,7 +16,6 @@
     line="DocumentRoot /var/www/wordpress"
   notify:
     - restart httpd
-  sudo: yes
 - name: Copy sample config file
   command: mv /var/www/wordpress/wp-config-sample.php /var/www/wordpress/wp-config.php creates=/var/www/wordpress/wp-config.php
   sudo: yes
