@@ -44,7 +44,7 @@ resource "aws_security_group" "openvpn" {
     to_port   = 443
 
     cidr_blocks = [
-      "${var.admin_ip}",
+      "0.0.0.0/0",
     ]
   }
 

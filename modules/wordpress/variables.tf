@@ -7,6 +7,11 @@ variable "env" {}
 variable "name" {}
 
 variable "wordpress_instance_type" {}
+
+variable "wordpressdatabase_instance_type" {}
+
+variable "database_subnets" {}
+
 variable "key_name" {}
 
 variable "private_subnets" {}
@@ -14,6 +19,8 @@ variable "private_subnets" {}
 variable "private_subnet_ids" {}
 
 variable "public_subnet_ids" {}
+
+variable "database_subnet_ids" {}
 
 variable "vpn_subnets" {}
 

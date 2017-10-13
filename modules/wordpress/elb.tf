@@ -28,7 +28,7 @@ resource "aws_elb" "bar" {
     AutoOff   = "True"
   }
 
-  instances                   = ["${aws_instance.wordpress.id}"]
+  instances                   = ["${aws_instance.wordpress.*.id}"]
   cross_zone_load_balancing   = true
   idle_timeout                = 400
   connection_draining         = true
@@ -46,9 +46,9 @@ resource "aws_security_group" "wordpress_elb" {
 
   # For wordpress Client Web Server & Admin Web UI
   ingress {
-    protocol  = "tcp"
-    from_port = 80
-    to_port   = 80
+    protocol    = "tcp"
+    from_port   = 80
+    to_port     = 80
     cidr_blocks = ["0.0.0.0/0"]
   }
 

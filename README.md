@@ -4,11 +4,21 @@ Terraform scripts for building out a Base VPC, OpenVPN, Subnets, Routes, Routing
 
 Before running this Accept the Terms and Services for OpenVPN Access Server in AWS Market Place, Youll need to login into your AWS account to do so
 
+
+Tested with
+
+OpenVPN
+
 https://aws.amazon.com/marketplace/fulfillment?productId=fe8020db-5343-4c43-9e65-5ed4a825c931&ref_=dtl_psb_continue&region=us-east-1
+
+Cento 6 with updates
+https://aws.amazon.com/marketplace/fulfillment?productId=adc4348e-1dc3-41df-b833-e86ba57a33d6&ref_=dtl_psb_continue&region=us-east-1
 
 Terraform v0.9.11
 
 GNU Make 3.81
+
+ansible 2.3.2.0
 
 Need to create a secrets.tfvars file with these vars
 
@@ -27,7 +37,7 @@ make plan
 make apply
 
 
-#ansible role base on Ansible Example
+#Ansible role base on Ansible Example
 
 https://github.com/ansible/ansible-examples/tree/master/wordpress-nginx
 
@@ -40,14 +50,13 @@ This terraform creates
 3 VPN subnets
 3 Database Subnets
 
-All Subnets, NACL's and Route tables for al the subnets
+All Subnets, NACL's and Route tables for all the subnets
 
 1 VPC
-1 Wordpress instance
-IAM roles for wordpress
+3 Wordpress instances
+1 Wordpress Mysql database
 
 S3 bucket for cloudtrail
-S3 bucket for wordpress Ansible code
 
 Nat Gateway
 Internet gateway

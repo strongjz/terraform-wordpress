@@ -12,17 +12,6 @@ resource "aws_s3_bucket" "cloudtrail" {
   policy        = "${data.aws_iam_policy_document.cloudtrail.json}"
 }
 
-resource "aws_s3_bucket" "wordpressdemo" {
-  bucket        = "terraform-wordpress-demo"
-  force_destroy = true
-}
-
-resource "aws_s3_bucket_object" "wordpress" {
-  bucket = "${aws_s3_bucket.wordpressdemo.bucket}"
-  key    = "wordpress-nginx/"
-  source = "${file("./files/wordpress-nginx.zip")}"
-}
-
 data "aws_iam_policy_document" "cloudtrail" {
   statement {
     sid = "AWSCloudTrailAclCheck"

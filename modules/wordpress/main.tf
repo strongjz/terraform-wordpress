@@ -20,13 +20,14 @@ data "aws_ami" "centos_linux" {
 
 #instance
 resource "aws_instance" "wordpress" {
-  ami                    = "${data.aws_ami.centos_linux.id}"
-  ebs_optimized          = true
+  count = 3
+  ami   = "${data.aws_ami.centos_linux.id}"
+
   instance_type          = "${var.wordpress_instance_type}"
   vpc_security_group_ids = ["${aws_security_group.wordpress.id}"]
-  subnet_id              = "${element(split(",", var.private_subnets),0)}"
+  subnet_id              = "${element(split(",", var.private_subnet_ids),count.index)}"
   user_data              = "${file("./files/wordpress-userdata.sh")}"
-  iam_instance_profile   = "${aws_iam_role.wordpress.name}"
+  private_ip             = "${cidrhost(element(split(",", var.private_subnets),count.index), count.index + 10)}"
 }
 
 #security group
@@ -68,60 +69,8 @@ resource "aws_security_group" "wordpress" {
   }
 
   tags {
-    Name      = "${var.env}_${var.name}_db_sec_group"
+    Name      = "${var.env}_${var.name}_sec_group"
     Env       = "${var.env}"
     Terraform = "true"
-  }
-}
-
-#cloudwatch alarm
-
-resource "aws_iam_instance_profile" "wordpress" {
-  name  = "wordpress_profile"
-  role = "${aws_iam_role.wordpress.name}"
-}
-
-#s3 iam permissions for ec2
-resource "aws_iam_role" "wordpress" {
-  name = "wordpress-role"
-
-  assume_role_policy = <<EOF
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Action": "sts:AssumeRole",
-      "Principal": {
-        "Service": "ec2.amazonaws.com"
-      },
-      "Effect": "Allow",
-      "Sid": ""
-    }
-  ]
-}
-EOF
-}
-
-resource "aws_iam_role_policy" "wordpress" {
-  name = "wordpress_role_policy"
-  role = "${aws_iam_role.wordpress.id}"
-
-  policy = "${data.aws_iam_policy_document.wordpress_policy.json}"
-}
-
-data "aws_iam_policy_document" "wordpress_policy" {
-  statement {
-    sid = "AWSwordpressWrite"
-
-    actions = [
-      "s3:*",
-    ]
-
-    effect = "Allow"
-
-    resources = [
-      "arn:aws:s3:::terraform-wordpress-demo",
-      "arn:aws:s3:::terraform-wordpress-demo/*",
-    ]
   }
 }

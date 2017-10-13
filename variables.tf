@@ -15,6 +15,7 @@ variable "aws_account" {
 }
 
 variable "wordpress_instance_type" {}
+variable "wordpressdatabase_instance_type" {}
 
 #network
 variable "vpc_cidr" {}

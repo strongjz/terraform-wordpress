@@ -20,6 +20,10 @@ output "private_subnet_ids" {
   value = "${module.private_subnet.subnet_ids}"
 }
 
+output "database_subnet_ids" {
+  value = "${module.database_subnet.subnet_ids}"
+}
+
 # NAT
 output "nat_gateway_ids" {
   value = "${module.nat.nat_gateway_ids}"
