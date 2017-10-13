@@ -20,7 +20,7 @@ apply:
 	terraform apply -var-file=secrets.tfvars
 
 ansible:
-	terraform output 
+	terraform output
 
 destroy:
 	terraform destroy -var-file=secrets.tfvars

@@ -1,7 +1,11 @@
 ---
 - name: Install php extensions
-  apt: name={{ item }} state=present
+  yum: name={{ item }} state=present
   sudo: yes
   with_items:
-    - php5-gd
-    - libssh2-php
+    - icu
+    - libicu
+    - libicu-devel
+    - php-devel
+    - gcc
+    - gcc-c++
