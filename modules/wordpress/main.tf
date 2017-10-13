@@ -33,6 +33,31 @@ resource "aws_instance" "wordpress" {
     Name = "${var.name}-${count.index}"
   }
 
+  provisioner "file" {
+    source      = "./files/ansible.zip"
+    destination = "~/ansible.zip"
+
+    connection {
+      type     = "ssh"
+      user     = "ec2-user"
+      private_key = "${file("./files/wordpress-demo-key.pem")}"
+      host = "${aws_instance.wordpress.public_ip}"
+    }
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "unzip  ~/ansible.zip",
+      "cd ~/ansible",
+      "ansible-playbook -i hosts site.yml 1>output.log  2>&1"
+    ]
+    connection {
+      type     = "ssh"
+      user     = "ec2-user"
+      private_key = "${file("./files/wordpress-demo-key.pem")}"
+    }
+  }
+
 }
 
 #security group
