@@ -1,17 +1,16 @@
 #!/bin/bash -e
 
 sleep 30
-
-echo "apt-get update"
-apt-get -y update
-sleep 5
-
 echo "apt install common"
-apt-get -y install python27
+sudo apt-get install -y software-properties-common
 sleep 5
-
-echo "apt-get Install ansible"
-apt-get -y install ansible
+echo "install ansible apt repo"
+sudo apt-add-repository -y ppa:ansible/ansible
+sleep 5
+echo "Apt update"
+sudo apt-get -y update
+echo "Apt Install ansible"
+sudo apt-get -y install ansible
 
 curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip"
 

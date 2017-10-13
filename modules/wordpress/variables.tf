@@ -20,8 +20,11 @@ variable "private_subnet_ids" {}
 
 variable "public_subnet_ids" {}
 
+variable "public_subnets" {}
+
 variable "database_subnet_ids" {}
 
 variable "vpn_subnets" {}
 
 variable "vpc_id" {}
+variable "admin_ip" {}

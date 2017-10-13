@@ -18,7 +18,6 @@ data "aws_ami" "amazon_linux" {
   owners = ["137112412989"] # Amazon
 }
 
-
 #instance
 resource "aws_instance" "wordpress" {
   count = 3
@@ -26,19 +25,30 @@ resource "aws_instance" "wordpress" {
 
   instance_type          = "${var.wordpress_instance_type}"
   vpc_security_group_ids = ["${aws_security_group.wordpress.id}"]
-  subnet_id              = "${element(split(",", var.private_subnet_ids),count.index)}"
+  subnet_id              = "${element(split(",", var.public_subnet_ids),count.index)}"
   user_data              = "${file("./files/wordpress-userdata.sh")}"
-  private_ip             = "${cidrhost(element(split(",", var.private_subnets),count.index), count.index + 10)}"
+  private_ip             = "${cidrhost(element(split(",", var.public_subnets),count.index), count.index + 10)}"
 
   tags {
     Name = "${var.name}-${count.index}"
-    
   }
+
+  provisioner "file" {
+  source      = "${file("./files/ansible/")}"
+  destination = "~/ansible"
+
+  connection {
+    type     = "ssh"
+    user     = "ec2-user"
+    private_key = "${file(".files/wordpress-demo-key.pem")}"
+  }
+}
+
 }
 
 #security group
 resource "aws_security_group" "wordpress" {
-  name        = "${var.env}_${var.name}_wordpress_sec_group"
+  name        = "${var.env}_${var.name}_instances_sec_group"
   description = "Allows wordpress connections"
   vpc_id      = "${var.vpc_id}"
 
@@ -50,18 +60,10 @@ resource "aws_security_group" "wordpress" {
   }
 
   ingress {
-    from_port = "0"
-    to_port   = "0"
-    protocol  = "-1"
-
-    cidr_blocks = ["${split(",", var.vpn_subnets)}"]
-  }
-
-  ingress {
     from_port   = 0
     to_port     = 0
     protocol    = "-1"
-    cidr_blocks = ["${split(",", var.vpn_subnets)}"]
+    cidr_blocks = ["${var.admin_ip}"]
   }
 
   egress {

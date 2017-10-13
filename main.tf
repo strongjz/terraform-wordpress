@@ -42,6 +42,8 @@ module "wordpress" {
   vpn_subnets                     = "${var.openvpn_cidr}"
   key_name                        = "${var.key_name}"
   name                            = "${var.name}"
+  public_subnets                  = "${var.public_subnets}"
+  admin_ip                        = "${var.admin_ip}"
   public_subnet_ids               = "${module.network.public_subnet_ids}"
   vpc_id                          = "${module.network.vpc_id}"
   wordpress_instance_type         = "${var.wordpress_instance_type}"

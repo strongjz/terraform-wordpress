@@ -1,6 +1,6 @@
 .PHONY: get plan apply
 
-all: check clean get plan apply ansible
+all: check clean get plan apply
 
 check:
 	terraform -v  >/dev/null 2>&1 || echo "Terraform not installed" || exit 1
@@ -19,8 +19,8 @@ plan:
 apply:
 	terraform apply -var-file=secrets.tfvars
 
+ansible:
+	terraform output 
+
 destroy:
 	terraform destroy -var-file=secrets.tfvars
-
-ansible:
-	ansible-playbook -i ./files/wordpress-nginx/hosts site.yml

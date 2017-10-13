@@ -22,6 +22,8 @@ openvpn_admin_user = "vpnadmin"
 openvpn_cidr = "172.27.139.0/24"
 users = "2"
 
+admin_ip = "70.198.143.219/32"
+
 
 #--------------------------------------------------------------
 # Wordpress
